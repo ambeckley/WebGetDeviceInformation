@@ -35,6 +35,9 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
+        .data {
+            color: #00BFFF; /* Deep sky blue for data */
+        }
         button {
             background-color: #ADD8E6; /* Light blue button */
             color: #000; /* Black text */
@@ -54,9 +57,9 @@
 <body>
     <div class="container">
         <h1>User Information</h1>
-        <div id="user-info"></div>
-        <div id="location-display"></div>
-        <div id="time-display"></div>
+        <div id="user-info" class="data"></div>
+        <div id="location-display" class="data"></div>
+        <div id="time-display" class="data"></div>
         <button id="download-btn">Download Device Info</button>
     </div>
 
