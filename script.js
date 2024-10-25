@@ -46,6 +46,20 @@ function getCurrentTime(timezone) {
     return new Intl.DateTimeFormat('en-US', options).format(new Date());
 }
 
+// Function to download the data as JSON
+function downloadJSON(data, filename) {
+    const jsonString = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
 // Main function to get IP, location, and current time
 async function displayUserInfo() {
     const ip = await fetchUserIP();
@@ -74,6 +88,9 @@ async function displayUserInfo() {
             document.getElementById('time-display').innerHTML = `
                 <strong>Current Time:</strong> ${locationInfo.current_time} (${locationInfo.timezone})
             `;
+
+            // Add event listener for the download button
+            document.getElementById('download-btn').onclick = () => downloadJSON(locationInfo, 'device.json');
         }
     }
 }
